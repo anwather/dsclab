@@ -1,3 +1,4 @@
+Enable-AzureRMAlias
 $ResourceGroupName = $env:ResourceGroupName
 $automationAccountName = $env:AutomationAccountName
 
