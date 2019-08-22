@@ -12,7 +12,7 @@ Configuration LCM {
     Node $Nodename {
         Settings {
             RefreshMode        = "Pull"
-            RebootNodeIfNeeded = "False"
+            RebootNodeIfNeeded = $true
         }
 
         ConfigurationRepositoryWeb Web01 {
