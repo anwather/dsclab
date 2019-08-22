@@ -5,6 +5,7 @@ variables:
   ResourceGroupName: dsclab
   AutomationAccountName: dsclab
   skipComponentGovernanceDetection: true
+  System.Debug: true
 
 stages:
 - stage: Deploy
