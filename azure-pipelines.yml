@@ -19,7 +19,6 @@ stages:
           deploy:
             steps:
               - checkout: self
-              - pwsh: gci -recurse
               - task: AzurePowerShell@4
                 inputs:
                   azureSubscription: 'AzureConnect'
