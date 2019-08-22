@@ -19,7 +19,7 @@ stages:
             steps:
               - task: AzurePowerShell@4
                 inputs:
-                  azureSubscription: $(Connection)
+                  azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
                   ScriptPath: '1_UploadConfiguration.ps1'
                   azurePowerShellVersion: 'LatestVersion'
