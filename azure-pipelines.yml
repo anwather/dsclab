@@ -1,14 +1,26 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+variables:
+  ResourceGroupName: dsclab
+  AutomationAccountName: dsclab
+  skipComponentGovernanceDetection: true
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Deploy
+  jobs: 
+    - deployment: 
+      environment: Production
+      pool:
+        vmImage: 'windows-latest'
+      strategy: 
+        runOnce:
+          deploy:
+            steps:
+              - task: AzurePowerShell@4
+                inputs:
+                  azureSubscription: $(Connection)
+                  ScriptType: 'FilePath'
+                  ScriptPath: '1_UploadConfiguration.ps1'
+                  azurePowerShellVersion: 'LatestVersion'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
