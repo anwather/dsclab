@@ -22,6 +22,6 @@ stages:
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
-                  ScriptPath: 'System.DefaultWorkingDirectory\\Pipeline\\1_UploadConfiguration.ps1'
+                  ScriptPath: '$(System.DefaultWorkingDirectory)\\Pipeline\\1_UploadConfiguration.ps1'
                   azurePowerShellVersion: 'LatestVersion'
 
