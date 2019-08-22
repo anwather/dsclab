@@ -19,24 +19,28 @@ stages:
             steps:
               - checkout: self
               - task: AzurePowerShell@4
+                displayName: 'Upload Configuration'
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
                   ScriptPath: '$(System.DefaultWorkingDirectory)\\Pipeline\\1_UploadConfiguration.ps1'
                   azurePowerShellVersion: 'LatestVersion'
               - task: AzurePowerShell@4
+                displayName: 'Compile Configuration'
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
                   ScriptPath: '$(System.DefaultWorkingDirectory)\\Pipeline\\2_CompileConfiguration.ps1'
                   azurePowerShellVersion: 'LatestVersion'
               - task: AzurePowerShell@4
+                displayName: 'Upload Runbook'
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
                   ScriptPath: '$(System.DefaultWorkingDirectory)\\Pipeline\\3_UploadRunbook.ps1'
                   azurePowerShellVersion: 'LatestVersion'
               - task: AzurePowerShell@4
+                displayName: 'Register DSC Nodes'  
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
