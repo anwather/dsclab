@@ -5,7 +5,6 @@ variables:
   ResourceGroupName: dsclab
   AutomationAccountName: dsclab
   skipComponentGovernanceDetection: true
-  System.Debug: true
 
 stages:
 - stage: Deploy
@@ -24,5 +23,23 @@ stages:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
                   ScriptPath: '$(System.DefaultWorkingDirectory)\\Pipeline\\1_UploadConfiguration.ps1'
+                  azurePowerShellVersion: 'LatestVersion'
+              - task: AzurePowerShell@4
+                inputs:
+                  azureSubscription: 'AzureConnect'
+                  ScriptType: 'FilePath'
+                  ScriptPath: '$(System.DefaultWorkingDirectory)\\Pipeline\\2_CompileConfiguration.ps1'
+                  azurePowerShellVersion: 'LatestVersion'
+              - task: AzurePowerShell@4
+                inputs:
+                  azureSubscription: 'AzureConnect'
+                  ScriptType: 'FilePath'
+                  ScriptPath: '$(System.DefaultWorkingDirectory)\\Pipeline\\3_UploadRunbook.ps1'
+                  azurePowerShellVersion: 'LatestVersion'
+              - task: AzurePowerShell@4
+                inputs:
+                  azureSubscription: 'AzureConnect'
+                  ScriptType: 'FilePath'
+                  ScriptPath: '$(System.DefaultWorkingDirectory)\\Pipeline\\4_RegisterDSCNode.ps1'
                   azurePowerShellVersion: 'LatestVersion'
 

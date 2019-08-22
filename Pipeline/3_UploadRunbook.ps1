@@ -1,5 +1,8 @@
+Enable-AzureRMAlias
 $ResourceGroupName = $env:ResourceGroupName
 $automationAccountName = $env:AutomationAccountName
+
+Set-Location $env:SYSTEM_DEFAULTWORKINGDIRECTORY\Pipeline
 
 $automationAccount = Get-AzureRmAutomationAccount -ResourceGroupName $ResourceGroupName -Name $automationAccountName
 
