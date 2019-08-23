@@ -10,7 +10,7 @@ $nodes = Import-CSV -Path ..\Nodes\nodes.csv
 
 $automationAccount | Get-AzureRmAutomationDscOnboardingMetaconfig -Force
 
-gci -Recurse -File
+gci -path D:\ -Filter *.mof -Recurse -File
 
 $aaVariables = @("RegistrationKey", "EndpointURL")
 $RegistrationKey = (Get-Content .\DscMetaConfigs\localhost.meta.mof | Select-String "RegistrationKey = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
