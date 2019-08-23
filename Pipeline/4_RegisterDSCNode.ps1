@@ -10,11 +10,11 @@ $nodes = Import-CSV -Path ..\Nodes\nodes.csv
 
 $automationAccount | Get-AzureRmAutomationDscOnboardingMetaconfig -Force
 
-gci -path D:\ -Filter *.mof -Recurse -File
+$mofFile = Get-ChildItem -Path D:\ -Filter localhost.meta.mof -Recurse -Force
 
 $aaVariables = @("RegistrationKey", "EndpointURL")
-$RegistrationKey = (Get-Content .\DscMetaConfigs\localhost.meta.mof | Select-String "RegistrationKey = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
-$EndpointURL = (Get-Content .\DscMetaConfigs\localhost.meta.mof | Select-String "ServerURL = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
+$RegistrationKey = (Get-Content $mofFile.FullName | Select-String "RegistrationKey = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
+$EndpointURL = (Get-Content $mofFile.FullName | Select-String "ServerURL = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
 
 
 foreach ($node in $nodes) {
