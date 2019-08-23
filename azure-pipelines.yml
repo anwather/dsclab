@@ -20,6 +20,7 @@ stages:
               - checkout: self
               - task: AzurePowerShell@4
                 displayName: 'Upload Configuration'
+                enabled: false
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
@@ -27,6 +28,7 @@ stages:
                   azurePowerShellVersion: 'LatestVersion'
               - task: AzurePowerShell@4
                 displayName: 'Compile Configuration'
+                enabled: false
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
@@ -34,6 +36,7 @@ stages:
                   azurePowerShellVersion: 'LatestVersion'
               - task: AzurePowerShell@4
                 displayName: 'Upload Runbook'
+                enabled: false
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
