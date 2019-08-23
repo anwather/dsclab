@@ -5,6 +5,8 @@ Param(
     $Configuration
 )
 
+$Credential = Get-AutomationPSCredential -Name 'DSC Account'
+
 [DscLocalConfigurationManager()]
 Configuration LCM {
     Param($EndpointURL, $RegistrationKey, $Nodename, $Configuration)
@@ -36,4 +38,4 @@ $params = @{
 }
 
 LCM @params
-Set-DscLocalConfigurationManager -Path .\LCM -Verbose -Force
+Set-DscLocalConfigurationManager -Path .\LCM -Verbose -Force -Credential $Credential

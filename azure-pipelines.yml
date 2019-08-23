@@ -37,7 +37,7 @@ stages:
                   azurePowerShellVersion: 'LatestVersion'
               - task: AzurePowerShell@4
                 displayName: 'Upload Runbook'
-                enabled: false
+                enabled: true
                 inputs:
                   azureSubscription: 'AzureConnect'
                   ScriptType: 'FilePath'
