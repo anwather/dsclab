@@ -10,7 +10,7 @@ $nodes = Import-CSV -Path ..\Nodes\nodes.csv
 
 $automationAccount | Get-AzureRmAutomationDscOnboardingMetaconfig -Force
 
-$mofFile = Get-ChildItem -Path D:\ -Filter localhost.meta.mof -Recurse -Force
+$mofFile = Get-ChildItem -Path D:\a\_tasks -Filter localhost.meta.mof -Recurse -Force
 
 $aaVariables = @("RegistrationKey", "EndpointURL")
 $RegistrationKey = (Get-Content $mofFile.FullName | Select-String "RegistrationKey = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
