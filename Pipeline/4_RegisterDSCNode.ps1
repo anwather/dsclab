@@ -8,6 +8,7 @@ $automationAccount = Get-AzureRmAutomationAccount -ResourceGroupName $ResourceGr
 
 $nodes = Import-CSV -Path ..\Nodes\nodes.csv
 
+Write-Verbose -Message "Generating metaconfig from automation account" -Verbose
 $automationAccount | Get-AzureRmAutomationDscOnboardingMetaconfig -Force
 
 $mofFile = Get-ChildItem -Path D:\a\_tasks -Filter localhost.meta.mof -Recurse -Force
@@ -26,6 +27,20 @@ foreach ($node in $nodes) {
             NodeName        = $node.NodeName
             Configuration   = $node.Configuration
         }
+        Write-Verbose -Message "Starting runbook to register node $($node.NodeName)" -Verbose
         $automationAccount | Start-AzureRmAutomationRunbook -Name Register-LocalNode -Parameters $params -RunOn Master
+    }
+    else {
+        Write-Verbose -Message "Node $($node.NodeName) already exists in Azure Automation" -Verbose
+        if ($exists.NodeConfigurationName -ne $node.Configuration) {
+            Write-Verbose -Message "Configuration is different on node $($node.NodeName) - registering again" -Verbose
+            $params = @{
+                EndpointURL     = $EndpointURL
+                RegistrationKey = $RegistrationKey
+                NodeName        = $node.NodeName
+                Configuration   = $node.Configuration
+            }
+            $automationAccount | Start-AzureRmAutomationRunbook -Name Register-LocalNode -Parameters $params -RunOn Master
+        }
     }
 }

@@ -9,6 +9,6 @@ $configurations = Get-ChildItem -Path ..\Configurations -Filter *.ps1 -Exclude C
 
 foreach ($configuration in $configurations) {
     Set-Location -Path (Split-Path $configuration.FullName -Parent)
-    Write-Verbose -Message "$($configuration.Name)" -Verbose
+    Write-Verbose -Message "Uploading $($configuration.Name) to automation account" -Verbose
     $automationAccount | Import-AzureRmAutomationDscConfiguration -SourcePath $configuration.FullName -Published -Force
 }

@@ -9,5 +9,6 @@ $automationAccount = Get-AzureRmAutomationAccount -ResourceGroupName $ResourceGr
 $runbooks = Get-ChildItem -Path ..\Runbooks -Filter *.ps1 -File
 
 foreach ($runbook in $runbooks) {
-    $automationAccount | Import-AzureRmAutomationRunbook -Name $runbook.BaseName -Path $runbook.FullName -Type PowerShell -Published -Force
+    Write-Verbose -Message "Uploading $($runbook.BaseName) to automation account" -Verbose
+    $automationAccount | Import-AzureRmAutomationRunbook -Name $runbook.BaseName -Path $runbook.FullName -Type PowerShell -Published -Force -LogVerbose $true
 }

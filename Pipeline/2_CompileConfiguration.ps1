@@ -10,9 +10,10 @@ $configurations = Get-ChildItem -Path ..\Configurations -Filter *.ps1 -Exclude C
 
 foreach ($configuration in $configurations) {
     Set-Location -Path (Split-Path $configuration.FullName -Parent)
+    Write-Verbose -Message "Compiling $($configuration.BaseName)" -Verbose
     $job = $automationAccount | Start-AzureRMAutomationDscCompilationJob -ConfigurationName $configuration.BaseName -Verbose
     while ($job.Status -ne "Completed") {
-        Write-Output "$($job.Status.ToUpper()) :Waiting for compilation job for configuration $($configuration.BaseName) to complete"
+        Write-Verbose -Message "$($job.Status.ToUpper()) :Waiting for compilation job for configuration $($configuration.BaseName) to complete" -Verbose
         Start-Sleep -Seconds 10
         $job = $automationAccount | Get-AzureRmAutomationDscCompilationJob -Id $job.Id
     }
