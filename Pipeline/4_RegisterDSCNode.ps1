@@ -11,8 +11,8 @@ $nodes = Import-CSV -Path ..\Nodes\nodes.csv
 $automationAccount | Get-AzureRmAutomationDscOnboardingMetaconfig -Force
 
 $aaVariables = @("RegistrationKey", "EndpointURL")
-$RegistrationKey = (Get-Content ..\DscMetaConfigs\localhost.meta.mof | Select-String "RegistrationKey = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
-$EndpointURL = (Get-Content ..\DscMetaConfigs\localhost.meta.mof | Select-String "ServerURL = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
+$RegistrationKey = (Get-Content .\DscMetaConfigs\localhost.meta.mof | Select-String "RegistrationKey = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
+$EndpointURL = (Get-Content .\DscMetaConfigs\localhost.meta.mof | Select-String "ServerURL = `"(?<Key>.+)`";")[1].Matches.Groups[1].Value
 
 
 foreach ($node in $nodes) {
